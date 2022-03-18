@@ -34,3 +34,7 @@ Define the following Environment variables to allow the block communicate with t
     MQTT_BROKER_PORT
 ````
 
+## Acknowledgments
+Some inspiration on:
+* [modbus2mqtt](https://github.com/Instathings/modbus2mqtt)
+* [modbus-herdsman-converters](https://github.com/Instathings/modbus-herdsman-converters)
