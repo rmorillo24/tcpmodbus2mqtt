@@ -1,0 +1,16 @@
+###
+# Runtime image
+###
+FROM balenalib/%%BALENA_MACHINE_NAME%%-python:3-stretch-run
+
+# Defines our working directory in container
+WORKDIR /usr/src/app
+
+RUN pip install pymodbus
+RUN pip install paho-mqtt
+
+# This will copy all files in our root to the working  directory in the container
+COPY . ./
+
+# server.js will run when container starts up on the device
+CMD ["python","-u","tcpmodbus2mqtt.py"]

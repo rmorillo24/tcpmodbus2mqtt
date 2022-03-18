@@ -1,0 +1,41 @@
+{
+    "model": "SDM120T-3-1-2-H",
+    "vendor": "KeLian Electronical Instruments",
+    "description": "Smart Water meter w/ modbus rs485",
+    "supports": [
+        "instant_flow",
+        "daily_accumulated_flow_rate",
+        "monthly_accumulated_flow_rate",
+        "reading_test"],
+    "fromModbus": {
+        "input": {
+            "instant_flow": {
+                "address": 1,
+                "length": 2,
+                "polling_secs": 5,
+                "format": "ieee754"
+            },
+            "daily_accumulated_flow_rate": {
+                "address": 137,
+                "length": 2,
+                "polling_secs": 25,
+                "format": "float"
+            },
+            "monthly_accumulated_flow_rate": {
+                "address": 141,
+                "length": 2,
+                "polling_secs": 75,
+                "format": "float"
+            },
+            "reading_test": {
+                "address": 361,
+                "length": 2,
+                "polling_secs": 100,
+                "format": "ieee754"
+            }
+        },
+        "keep":{},
+        "output":{}
+    },
+    "toModbus":{}
+}
