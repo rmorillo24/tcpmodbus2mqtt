@@ -2,6 +2,7 @@
 Convert TCP modbus to mqtt messages.
 Designed as a block that will allow to use it as a docker service, like in a balena device, simply configuring it as a balenaBlock
 
+
 ## How it works
 The services loads a datamodel that defines the  the parameters you want to read from a given modbus slave. The idea is that anyone can use use this service with any standard MODBUS slave, only by configuring the datamodel configuration. 
 
@@ -58,6 +59,12 @@ The following Environment variables define the MODBUS and MQTT server parameters
     MQTT_BROKER_IP
     MQTT_BROKER_PORT
 ````
+
+
+## The origins as an example
+I started to build a Water Leak Detector in this [GH repo](https://github.com/rmorillo24/WaterLeakDetector). I used many existing balenaBlocks that made my life much simpler, and then I realized that much of what I was doing could be converted into a block.
+The Water Leak Detector 's only logic is to see if there's a leak. All the readings, publishing, graphing, storage, etc are blocks.
+
 
 ## Acknowledgments
 Some inspiration on:
