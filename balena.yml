@@ -1,0 +1,18 @@
+name: tcpmodbus2mqtt
+description: >-
+  Balena block that allows to define a datamodel of a MODBUS TCP slave, and send them to an MQTT server
+version: 1.0.0
+type: sw.block
+assets:
+  repository:
+    type: blob.asset
+    data:
+      url: 'https://github.com/rmorillo/tcpmodbus2mqtt'
+  logo:
+    type: blob.asset
+    data:
+      url: 'https://raw.githubusercontent.com/rmorillo24/tcpmodbus2mqtt/master/logo.png'
+data:
+  defaultDeviceType: fincm3
+  supportedDeviceTypes:
+    - fincm3

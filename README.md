@@ -1,28 +1,10 @@
 # tcpmodbus2mqtt
 Convert TCP modbus to mqtt messages.
+Designed as a block that will allow to use it as a docker service, like in a balena device, simply configuring it as a balenaBlock
 
-## Usage
+## How it works
+The services loads a datamodel that defines the  the parameters you want to read from a given modbus slave. The idea is that anyone can use use this service with any standard MODBUS slave, only by configuring the datamodel configuration. 
 
-### docker-compose.yml
-Add a container to your `docker-compose.yml` file like the following example
-
-````
-  services:
-
-    serialmodbus2mqtt:
-      image: rmorillo/tcpmodbus2mqtt
-      privileged: true
-      environment:
-        MODBUS_HOST_IP: '192.168.1.132'
-        MODBUS_HOST_PORT: '10502'
-        MQTT_BROKER_IP: '127.0.0.1'
-        MQTT_BROKER_PORT: '1883'
-      network_mode: host
-      restart: "no"
-````
-
-### Datamodel
-The `datamodel.json` file defines the parameters you want to read from my modbus slave. The idea is that anyone can use this to add any parameter with any device or machine with a standard MODBUS slave. 
 An example of a parameter that will be automatically be read:
 
 ```
@@ -44,8 +26,32 @@ The format of the data model allows to configure
 ### Reading and looping
 Each parameter has a polling time, that may depend on the meaning of the parameter. The script will spawn a process for each parameter. This process will loop infinitelly, with a sleeping time bewteen loops equaling the polling time we have defined
 
+## Block usage and configuration
+To use the block in you app, you will have to add it as a service 
+
+### docker-compose file
+Add a container to your `docker-compose.yml` file like the following example
+
+````
+  services:
+
+    tcpmodbus2mqtt:
+      image: bh.cr/rmorillo/tcpmodbus2mqtt
+      privileged: true
+      network_mode: host
+      restart: "no"
+````
+This example pulls directly from the balenaHub registry. You can also clone it and use it in your own repo
+
+### Environment variables
+These environment variables have to be defined in each of your devices, according to the servers configuration.
+
+#### Datamodel
+`DATAMODEL` The environment variable is a single string JSON with the contents of your datamodel. Please look at the `datamodel.json` file as an example of how it has to be defined
+
 ### Servers configuration
-Define the following Environment variables to allow the block communicate with the modbus slave and the mqtt server
+The following Environment variables define the MODBUS and MQTT server parameters:
+
 ````
     MODBUS_HOST_IP
     MODBUS_HOST_PORT
