@@ -50,7 +50,7 @@ These environment variables have to be defined in each of your devices, accordin
 #### Datamodel
 `DATAMODEL` The environment variable is a single string JSON with the contents of your datamodel. Please look at the `datamodel.json` file as an example of how it has to be defined
 
-### Servers configuration
+#### Servers configuration
 The following Environment variables define the MODBUS and MQTT server parameters:
 
 ````
