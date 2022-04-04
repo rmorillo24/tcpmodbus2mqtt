@@ -3,7 +3,7 @@ Convert TCP modbus to mqtt messages.
 Designed as a block that will allow to use it as a docker service, like in a balena device, simply configuring it as a balenaBlock
 
 ## Block usage and configuration
-To use the block in you app, you will have to add it as a service 
+To use the block in you app, you will have to add it as a service and define Device Variables in your app
 
 ### docker-compose file
 Add a container to your `docker-compose.yml` file like the following example
