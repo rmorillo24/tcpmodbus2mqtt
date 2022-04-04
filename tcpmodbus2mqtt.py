@@ -115,6 +115,7 @@ def loop_read_register(name, address, size, polling_secs, format):
         time.sleep(polling_secs) # Waiting for next poll,
 
 
+
 print("STARTING...")
 #########
 # Configuring logger
@@ -133,25 +134,15 @@ log.addHandler(ch)
 #########
 # loading datamodel
 try:
-    # with open('datamodel.json', 'r') as myfile:
-    #     data = myfile.read()
-    # datamodel = json.loads(data)
     datamodel = json.loads(os.environ['DATAMODEL_JSON'])
-    print("#######")
 except Exception as e:
     log.fatal(e)
     log.fatal("Could not parse datamodel file. Exitting.")
     exit()
 
 
-#########
-# Setting modbus and mqtt servers with hardcoded default values
 global mqttc
 global modbusc
-modbus_host = "192.168.1.132"
-modbus_port = "10502"
-mqtt_ip = "127.0.0.1"
-mqtt_port = "1883"
 modbusc = ModbusTcpClient(modbus_host, modbus_port)
 mqttc = mqtt.Client("mqttbroker")  # Create instance of client with client ID “digitest”
 init_servers(modbus_host, modbus_port, mqtt_ip, mqtt_port)

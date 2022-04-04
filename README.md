@@ -2,6 +2,32 @@
 Convert TCP modbus to mqtt messages.
 Designed as a block that will allow to use it as a docker service, like in a balena device, simply configuring it as a balenaBlock
 
+## Block usage and configuration
+To use the block in you app, you will have to add it as a service 
+
+### docker-compose file
+Add a container to your `docker-compose.yml` file like the following example
+
+````
+  services:
+
+    tcpmodbus2mqtt:
+      image: bh.cr/rmorillo/tcpmodbus2mqtt
+      privileged: true
+      network_mode: host
+      restart: "no"
+````
+This example pulls directly from the balenaHub registry. You can also clone it and use it in your own repo
+
+### Environment variables
+These environment variables have to be defined in each of your devices, as they may have different values and datamodels.
+The following is a screenshot of the balenaCloud's `Device Variables` tab
+
+
+
+_NOTE:_ `DATAMODEL` is the environment variable containing a single string JSON with the contents of your datamodel. Please look at the `assets/datamodel.json` file as an example of how it has to be defined
+
+
 
 ## How it works
 The services loads a datamodel that defines the  the parameters you want to read from a given modbus slave. The idea is that anyone can use use this service with any standard MODBUS slave, only by configuring the datamodel configuration. 
@@ -27,38 +53,6 @@ The format of the data model allows to configure
 ### Reading and looping
 Each parameter has a polling time, that may depend on the meaning of the parameter. The script will spawn a process for each parameter. This process will loop infinitelly, with a sleeping time bewteen loops equaling the polling time we have defined
 
-## Block usage and configuration
-To use the block in you app, you will have to add it as a service 
-
-### docker-compose file
-Add a container to your `docker-compose.yml` file like the following example
-
-````
-  services:
-
-    tcpmodbus2mqtt:
-      image: bh.cr/rmorillo/tcpmodbus2mqtt
-      privileged: true
-      network_mode: host
-      restart: "no"
-````
-This example pulls directly from the balenaHub registry. You can also clone it and use it in your own repo
-
-### Environment variables
-These environment variables have to be defined in each of your devices, according to the servers configuration.
-
-#### Datamodel
-`DATAMODEL` The environment variable is a single string JSON with the contents of your datamodel. Please look at the `datamodel.json` file as an example of how it has to be defined
-
-### Servers configuration
-The following Environment variables define the MODBUS and MQTT server parameters:
-
-````
-    MODBUS_HOST_IP
-    MODBUS_HOST_PORT
-    MQTT_BROKER_IP
-    MQTT_BROKER_PORT
-````
 
 
 ## The origins as an example
