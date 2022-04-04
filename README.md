@@ -53,6 +53,34 @@ The format of the data model allows to configure
 ### Reading and looping
 Each parameter has a polling time, that may depend on the meaning of the parameter. The script will spawn a process for each parameter. This process will loop infinitelly, with a sleeping time bewteen loops equaling the polling time we have defined
 
+## How to try it 
+
+### Use NodeRed to simulate a TCP Modbus device
+1. Install [Node Red](https://nodered.org/docs/getting-started/local) in the same LAN as your device
+2. Install the MODBUS server for NodeRed, [node-red-contrib-modbus](https://flows.nodered.org/node/node-red-contrib-modbus)
+3. Configure the server with your local IP address and a port of your election (eg. 10502)
+4. Run `assets\randomModbusInjector.py` to populate your MODBUS simulator with data. First your will have to configure the IP address of the MODBUS server
+
+### Use any MQTT broker to publish your messages
+Any MQTT broker with a reachable IP address will work. 
+For instance, you can install a mosquito broker in the same balena device adding the following service:
+
+````
+  mqtt:
+    image: eclipse-mosquitto:1.6.15
+    ports:
+      - "1883:1883"
+    restart: always  
+````
+
+### Create your balenaCloud fleet and add the device
+1. Create a balenaCloud fleet. I you don't know how to, you can follow the [Getting Started](https://www.balena.io/docs/learn/getting-started/fincm3/python/) guide
+2. Add to the docker-compose file containing the service as above
+3. Configure the Device Variables in your app with the addresses and ports of the MODBUS and MQTT servers
+4. Copy the contents of `assets\datamodel.json` into the `DATAMODEL_JSON` variable
+5. You will be able to read the messages in your broker.
+6. You may use the logs in the balenaCloud Dashboard to check if the `tcpmodbus2mqtt` service is connecting to the services and running
+
 
 
 ## The origins as an example
