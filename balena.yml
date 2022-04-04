@@ -11,7 +11,7 @@ assets:
   logo:
     type: blob.asset
     data:
-      url: 'https://raw.githubusercontent.com/rmorillo24/tcpmodbus2mqtt/master/logo.png'
+      url: 'https://raw.githubusercontent.com/rmorillo24/tcpmodbus2mqtt/master/assets/logo.png'
 data:
   defaultDeviceType: fincm3
   supportedDeviceTypes:
