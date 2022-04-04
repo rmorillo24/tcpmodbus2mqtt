@@ -23,7 +23,7 @@ This example pulls directly from the balenaHub registry. You can also clone it a
 These environment variables have to be defined in each of your devices, as they may have different values and datamodels.
 The following is a screenshot of the balenaCloud's `Device Variables` tab
 
-[Device Variables screenshot example](https://raw.githubusercontent.com/rmorillo24/tcpmodbus2mqtt/main/assets/devicevariables.png)
+![Device Variables screenshot example](https://raw.githubusercontent.com/rmorillo24/tcpmodbus2mqtt/main/assets/devicevariables.png)
 
 _NOTE:_ `DATAMODEL` is the environment variable containing a single string JSON with the contents of your datamodel. Please look at the `assets/datamodel.json` file as an example of how it has to be defined
 
