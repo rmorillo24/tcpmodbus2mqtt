@@ -55,6 +55,10 @@ Each parameter has a polling time, that may depend on the meaning of the paramet
 
 ## How to try it 
 
+The easiest way I've found to test this block is using Nodered as a modbus server, and a Python script that injects random values in the server so they can be read. The schema is simple...
+
+![tcpmodbus2mqtt test setup](https://github.com/rmorillo24/tcpmodbus2mqtt/blob/main/assets/testSetup.png)
+
 ### Use NodeRed to simulate a TCP Modbus device
 1. Install [Node Red](https://nodered.org/docs/getting-started/local) in the same LAN as your device
 2. Install the MODBUS server for NodeRed, [node-red-contrib-modbus](https://flows.nodered.org/node/node-red-contrib-modbus)
