@@ -20,24 +20,7 @@ import logging
 def init_servers(modbus_host, modbus_port, mqtt_ip, mqtt_port):
     """
     init_servers: Reads environment variables for MODBUS server and MQTT broker. Then, connects.
-        I'm leaving some hardcoded values for testing
     """
-    #Loading environment variables for configuring the modbus server
-    try:
-        modbus_host = os.environ['MODBUS_HOST_IP']
-        modbus_port = os.environ['MODBUS_HOST_PORT']
-    except:
-        log.log(logging.WARNING, "MODBUS slave address variables harcoded.")
-        #not exiting for testing purposes
-
-    #Loading environment variables for configuring the mqtt broker
-    try:
-        mqtt_ip = os.environ['MQTT_BROKER_IP']
-        mqtt_port = os.environ['MQTT_BROKER_PORT']
-    except:
-        log.warning("MQTT broker address variables harcoded.")
-        #not exiting for testing purposes
-
     #Connecting to MODBUS server
     try:
         logging.info("Attempting to connect to MODBUS server " + modbus_host + ":" + modbus_port)
@@ -115,7 +98,6 @@ def loop_read_register(name, address, size, polling_secs, format):
         time.sleep(polling_secs) # Waiting for next poll,
 
 
-
 print("STARTING...")
 #########
 # Configuring logger
@@ -131,9 +113,13 @@ ch.setFormatter(formatter)
 log.addHandler(ch)
 
 
+
 #########
 # loading datamodel
 try:
+    # with open('datamodel.json', 'r') as myfile:
+    #     data = myfile.read()
+    # datamodel = json.loads(data)
     datamodel = json.loads(os.environ['DATAMODEL_JSON'])
 except Exception as e:
     log.fatal(e)
@@ -141,10 +127,32 @@ except Exception as e:
     exit()
 
 
+#########
+# Loading servers configurations
+#Loading environment variables for configuring the modbus server
+try:
+    modbus_host = os.environ['MODBUS_HOST_IP']
+    modbus_port = os.environ['MODBUS_HOST_PORT']
+except:
+    log.fatal(logging.ERROR, "MODBUS slave address not defined.")
+    exit()
+
+#Loading environment variables for configuring the mqtt broker
+try:
+    mqtt_ip = os.environ['MQTT_BROKER_IP']
+    mqtt_port = os.environ['MQTT_BROKER_PORT']
+except:
+    log.fatal(logging.ERROR, "MQTT broker address variables not defined.")
+    exit()
+
+
+
+########
+# Connecting to servers
 global mqttc
 global modbusc
 modbusc = ModbusTcpClient(modbus_host, modbus_port)
-mqttc = mqtt.Client("mqttbroker")  # Create instance of client with client ID “digitest”
+mqttc = mqtt.Client("mqttbroker")  # Create instance of client
 init_servers(modbus_host, modbus_port, mqtt_ip, mqtt_port)
 
 
