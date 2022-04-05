@@ -1,6 +1,6 @@
 name: tcpmodbus2mqtt
 description: >-
-  Balena block that allows to define a datamodel of a MODBUS TCP slave, and send values to an MQTT server. The datamodel allows defining different address, length and polling times per parameter.
+Balena block that reads MODBUS parameters as defined in a datamodel and send values to an MQTT server. The datamodel allows defining an address, a length and a polling time per parameter.
 version: 1.0.0
 type: sw.block
 assets:
